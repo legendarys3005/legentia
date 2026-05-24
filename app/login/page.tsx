@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './login.module.css';
+import { redirect } from 'next/navigation';
 
 const words = ['Explore', 'Learn', 'Master'];
 
@@ -76,33 +77,32 @@ export default function LoginPage() {
           </form>
 
           {/* Password visibility toggle */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={showPassword ? '../assets/hide.png' : '../assets/show.png'}
+            src={showPassword ? '/assets/hide.png' : '/assets/show.png'}
             alt="Toggle password visibility"
             id="toggle"
             className={styles.toggle}
             onClick={() => setShowPassword((prev) => !prev)}
           />
 
-          <button type="submit" id="login" className={styles.loginBtn}>
+          <button type="submit" id="login" className={styles.loginBtn} style={{backgroundColor: "#C61B21", height: 50, width: 300, marginBottom: 0, paddingBottom: 0}} onClick={() => redirect("/courses")}>
             Login
           </button>
 
-          <div className={styles.signUp}>
+          <div className={styles.signUp} style={{display: "flex", gap: 9}}> 
             <p>New Here?</p>
-            <Link href="/sign_up">Sign Up</Link>
+            <Link href="/signup" style={{ cursor: "pointer" }}>Sign Up</Link>
           </div>
 
           <hr className={styles.divider} />
 
-          <div className={styles.otherLogin}>
-            <button type="button" className={styles.google}>
-              Sign in with <img src="../../assets/google.png" alt="Google" />
+          <div className={styles.otherLogin} >
+            <button type="button" className={styles.google} style={{display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #ffffff6c"}}>
+              Sign in with <img src="/assets/google.png" alt="Google" />
             </button>
-            <button type="button" className={styles.microsoft}>
+            <button type="button" className={styles.microsoft} style={{display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #ffffff6c"}}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              Sign in with <img src="../assets/microsoft.png" alt="Microsoft" />
+              Sign in with <img src="/assets/microsoft.png" alt="Microsoft" />
             </button>
           </div>
         </div>
