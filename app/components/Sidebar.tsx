@@ -94,26 +94,7 @@ export default function Sidebar() {
       {/* Logo / Brand */}
       <div className="sidebar-brand">
         <div className="sidebar-logo">
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-            <defs>
-              <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
-                <stop offset="0%" stopColor="#818cf8" />
-                <stop offset="100%" stopColor="#c084fc" />
-              </linearGradient>
-            </defs>
-            <rect width="32" height="32" rx="8" fill="url(#logo-grad)" />
-            <text
-              x="16"
-              y="22"
-              textAnchor="middle"
-              fill="white"
-              fontSize="18"
-              fontWeight="700"
-              fontFamily="system-ui"
-            >
-              L
-            </text>
-          </svg>
+          <img src="/logo.ico" alt="" style={{width: 40, borderRadius: 10}}/>
         </div>
         <span className="sidebar-brand-text">Legentia</span>
       </div>
