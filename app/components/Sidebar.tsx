@@ -1,9 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import styles from "./Sidebar.module.css";
 
 const navItems = [
+  {
+    label: "Courses",
+    href: "/courses",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+      </svg>
+    ),
+  },
   {
     label: "Explore",
     href: "/explore",
@@ -11,15 +21,6 @@ const navItems = [
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.3-4.3" />
-      </svg>
-    ),
-  },
-  {
-    label: "Courses",
-    href: "/courses",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
       </svg>
     ),
   },
@@ -90,13 +91,10 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="sidebar" id="main-sidebar">
+    <aside className="sidebar" id="main-sidebar" style={{ backgroundColor: "#191919", width: "18vw" }}>
       {/* Logo / Brand */}
-      <div className="sidebar-brand">
-        <div className="sidebar-logo">
-          <img src="/logo.ico" alt="" style={{width: 40, borderRadius: 10}}/>
-        </div>
-        <span className="sidebar-brand-text">Legentia</span>
+      <div className="sidebar-brand" style={{ padding: "20px 25px 8px 25px", alignItems: "center", cursor: "pointer", userSelect: "none" }} onClick={() => redirect("/courses")}>
+        <span className="sidebar-brand-text" style={{ fontSize: 40, fontFamily: "Quicksand", color: "#e60e15d4", fontWeight: 600 }}>Legentia</span>
       </div>
 
       {/* Navigation */}
@@ -105,16 +103,19 @@ export default function Sidebar() {
           {navItems.map((item) => {
             const active = isActive(item.href);
             return (
-              <li key={item.href}>
+              <li
+                key={item.href}
+                className={`${styles.sidebarItem} ${active ? styles.active : ""}`}
+              >
                 <Link
                   href={item.href}
                   className={`sidebar-nav-link ${active ? "active" : ""}`}
                   id={`nav-${item.label.toLowerCase()}`}
                   aria-current={active ? "page" : undefined}
-                  style={{ display: "flex", gap: "8px" }}
+                  style={{ display: "flex", gap: "8px", marginTop: 10, marginBottom: 10, padding: 20 }}
                 >
                   <span className="sidebar-nav-icon">{item.icon}</span>
-                  <span className="sidebar-nav-label">{item.label}</span>
+                  <span className="sidebar-nav-label" style={{ fontSize: 20 }}>{item.label}</span>
                   {active && <span className="sidebar-active-indicator" />}
                 </Link>
               </li>
@@ -124,16 +125,17 @@ export default function Sidebar() {
       </nav>
 
       {/* Profile at bottom */}
-      <div className="sidebar-footer">
+      <div 
+                className={`${styles.sidebarItem} ${isActive(profileItem.href) ? styles.active : ""}`}>
         <Link
           href={profileItem.href}
           className={`sidebar-nav-link ${isActive(profileItem.href) ? "active" : ""}`}
           id="nav-profile"
           aria-current={isActive(profileItem.href) ? "page" : undefined}
-          style={{ display: "flex", gap: "8px" }}
+          style={{ display: "flex", gap: "8px", marginTop: 10, marginBottom: 10, padding: 20 }}
         >
           <span className="sidebar-nav-icon">{profileItem.icon}</span>
-          <span className="sidebar-nav-label">{profileItem.label}</span>
+          <span className="sidebar-nav-label" style={{ fontSize: 20 }}>{profileItem.label}</span>
           {isActive(profileItem.href) && (
             <span className="sidebar-active-indicator" />
           )}
