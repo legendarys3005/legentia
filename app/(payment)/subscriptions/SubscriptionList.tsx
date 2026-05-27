@@ -1,0 +1,179 @@
+"use client";
+
+import { useState } from "react";
+import { BackButton } from "./utils";
+import styles from "./subscriptions.module.css";
+
+interface SubscriptionPlan {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: number;
+  yearlyPrice: number; // yearly price per month (e.g. $24 instead of $29)
+  features: string[];
+  isPopular: boolean;
+  ctaText: string;
+}
+
+const PLANS: SubscriptionPlan[] = [
+  {
+    id: "starter",
+    name: "Starter",
+    description: "Perfect for beginners looking to learn core programming languages and fundamentals.",
+    monthlyPrice: 15,
+    yearlyPrice: 12,
+    features: [
+      "Access to 10+ core foundation courses",
+      "Basic interactive coding playgrounds",
+      "Public community forum access",
+      "5 monthly challenge submissions",
+      "Basic learning progress tracking"
+    ],
+    isPopular: false,
+    ctaText: "Start Learning"
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    description: "Accelerate your path to mastery with full platform access, roadmaps, and custom paths.",
+    monthlyPrice: 29,
+    yearlyPrice: 24,
+    features: [
+      "Access to 100+ advanced courses & paths",
+      "Unlimited interactive coding labs & workspaces",
+      "Personalized learning roadmaps",
+      "Unlimited challenge submissions",
+      "VIP Discord support community",
+      "Verified course completion certificates"
+    ],
+    isPopular: true,
+    ctaText: "Upgrade to Pro"
+  },
+  {
+    id: "elite",
+    name: "Elite",
+    description: "Designed for developers aiming for top tech careers with premium mentorship and reviews.",
+    monthlyPrice: 79,
+    yearlyPrice: 64,
+    features: [
+      "Everything included in the Pro tier",
+      "1-on-1 monthly video mentorship session",
+      "Quarterly resume & portfolio reviews",
+      "Access to exclusive masterclasses",
+      "Guaranteed priority support under 2 hours",
+      "Exclusive mock interview preparation"
+    ],
+    isPopular: false,
+    ctaText: "Unlock Elite Access"
+  }
+];
+
+export default function SubscriptionList() {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+
+  const calculateYearlyTotal = (pricePerMonth: number) => {
+    return pricePerMonth * 12;
+  };
+
+  return (
+    <div className={styles.container}>
+      {/* Header */}
+      <div className={styles.header}>
+        {/* <Link href="/courses" className={styles.backBtn}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Dashboard
+        </Link> */}
+        <BackButton />
+        <h1 className={styles.title}>Choose Your Path to Mastery</h1>
+        <p className={styles.subtitle}>
+          Unlock full access to Legentia's interactive learning platform, real-world projects, and expert-led roadmaps. Select the plan that fits your coding goals.
+        </p>
+      </div>
+
+      {/* Tab Switcher */}
+      <div className={styles.tabContainer}>
+        <button
+          onClick={() => setBillingCycle("monthly")}
+          className={`${styles.tabBtn} ${billingCycle === "monthly" ? styles.activeTabBtn : ""}`}
+        >
+          Monthly
+        </button>
+        <button
+          onClick={() => setBillingCycle("yearly")}
+          className={`${styles.tabBtn} ${billingCycle === "yearly" ? styles.activeTabBtn : ""}`}
+        >
+          Yearly
+          <span className={styles.discountBadge}>Save 20%</span>
+        </button>
+      </div>
+
+      {/* Pricing Grid */}
+      <div className={styles.grid}>
+        {PLANS.map((plan) => {
+          const price = billingCycle === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
+
+          return (
+            <div
+              key={plan.id}
+              className={`${styles.card} ${plan.isPopular ? styles.popularCard : ""}`}
+            >
+              {plan.isPopular && (
+                <div className={styles.popularBadge}>Most Popular</div>
+              )}
+
+              <h3 className={styles.planName}>{plan.name}</h3>
+              <p className={styles.planDesc}>{plan.description}</p>
+
+              <div className={styles.priceContainer}>
+                <div className={styles.priceRow}>
+                  <span className={styles.currency}>$</span>
+                  <span className={styles.price}>{price}</span>
+                  <span className={styles.period}>/month</span>
+                </div>
+                <div className={styles.billingSubtitle}>
+                  {billingCycle === "yearly" ? (
+                    `Billed annually ($${calculateYearlyTotal(price)}/year)`
+                  ) : (
+                    "Billed monthly, cancel anytime"
+                  )}
+                </div>
+              </div>
+
+              <hr className={styles.divider} />
+
+              <ul className={styles.featureList}>
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className={styles.featureItem}>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`${styles.featureIcon} ${plan.isPopular ? styles.popularFeatureIcon : ""}`}
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                className={`${styles.ctaBtn} ${plan.isPopular ? styles.popularCtaBtn : ""}`}
+              >
+                {plan.ctaText}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

@@ -112,7 +112,7 @@ export default function Sidebar() {
                   className={`sidebar-nav-link ${active ? "active" : ""}`}
                   id={`nav-${item.label.toLowerCase()}`}
                   aria-current={active ? "page" : undefined}
-                  style={{ display: "flex", gap: "8px", marginTop: 10, marginBottom: 10, padding: 20 }}
+                  style={{ display: "flex", gap: "8px", marginTop: 10, marginBottom: 10, padding: 20, alignItems: "center" }}
                 >
                   <span className="sidebar-nav-icon">{item.icon}</span>
                   <span className="sidebar-nav-label" style={{ fontSize: 20 }}>{item.label}</span>
