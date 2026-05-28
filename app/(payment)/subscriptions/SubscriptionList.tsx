@@ -1,5 +1,6 @@
 "use client";
 
+// import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import { BackButton } from "./utils";
 import styles from "./subscriptions.module.css";
@@ -21,11 +22,11 @@ const PLANS: SubscriptionPlan[] = [
     name: "Plus",
     description: "Unlock uninterrupted learning and progress faster through structured coding education",
     monthlyPrice: 199,
-    yearlyPrice: 160,
+    yearlyPrice: 159,
     features: [
       "Unlimited Energy",
-      "Advanced Challenges",
       "Streak Pass",
+      "Unlimited Solutions",
       "Detailed Profile Statistics",
       "Early Access Features"
     ],
@@ -35,18 +36,17 @@ const PLANS: SubscriptionPlan[] = [
   {
     id: "pro",
     name: "Pro",
-    description: "Accelerate your path to mastery with full platform access, roadmaps, and custom paths.",
-    monthlyPrice: 285,
-    yearlyPrice: 228,
+    description: "Unlock advanced systems, premium labs, and deeper engineering experiences",
+    monthlyPrice: 286,
+    yearlyPrice: 229,
     features: [
-      "Access to 100+ advanced courses & paths",
-      "Unlimited interactive coding labs & workspaces",
-      "Personalized learning roadmaps",
-      "Unlimited challenge submissions",
-      "VIP Discord support community",
-      "Verified course completion certificates"
+      "Everything in Plus",
+      "Full Labs Access",
+      "Detailed Learning Analytics",
+      "Advanced Challenges",
+      "Exclusive Advanced Features"
     ],
-    isPopular: false,
+    isPopular: true,
     ctaText: "Get An Upgrade"
   },
   {
@@ -54,7 +54,7 @@ const PLANS: SubscriptionPlan[] = [
     name: "Elite",
     description: "Designed for developers aiming for top tech careers with premium mentorship and reviews.",
     monthlyPrice: 599,
-    yearlyPrice: 480,
+    yearlyPrice: 479,
     features: [
       "Everything included in the Pro tier",
       "1-on-1 monthly video mentorship session",
@@ -63,7 +63,7 @@ const PLANS: SubscriptionPlan[] = [
       "Guaranteed priority support under 2 hours",
       "Exclusive mock interview preparation"
     ],
-    isPopular: true,
+    isPopular: false,
     ctaText: "Unlock Elite Access"
   }
 ];
@@ -74,7 +74,7 @@ export default function SubscriptionList() {
 
   const formatSubscriptionPrice = (price: number) => {
     return price.toLocaleString('en-IN');
-  }
+  };
 
   const calculateYearlyTotal = (pricePerMonth: number) => {
     const totalPrice = pricePerMonth * 12;
@@ -84,6 +84,13 @@ export default function SubscriptionList() {
     }
 
     return formatSubscriptionPrice(totalPrice);
+  };
+
+  const calculateDiscountPersentage = (monthlyPrice: number, yearlyPrice: number) => {
+    const discount = monthlyPrice - yearlyPrice;
+
+    const percentage = discount / yearlyPrice * 100;
+    return Math.round(percentage);
   };
 
   return (
@@ -107,7 +114,10 @@ export default function SubscriptionList() {
       {/* Tab Switcher */}
       <div className={styles.tabContainer}>
         <button
-          onClick={() => setBillingCycle("monthly")}
+          onClick={() => {
+            setBillingCycle("monthly");
+            // router.push("/subscriptions/monthly");
+          }}
           className={`${styles.tabBtn} ${billingCycle === "monthly" ? styles.activeTabBtn : ""}`}
         >
           Monthly
@@ -134,7 +144,7 @@ export default function SubscriptionList() {
                 <div className={styles.popularBadge}>Most Popular</div>
               )}
               {billingCycle === "yearly" && (
-                <span className={styles.discountBadge}>Save 20%</span>
+                <span className={styles.discountBadge}>Save {calculateDiscountPersentage(plan.monthlyPrice, plan.yearlyPrice)}%</span>
               )}
 
               <h3 className={styles.planName}>{plan.name}</h3>
@@ -181,7 +191,7 @@ export default function SubscriptionList() {
               <button
                 className={`${styles.ctaBtn} ${plan.isPopular ? styles.popularCtaBtn : ""}`}
               >
-                {plan.ctaText}
+                {plan.ctaText || "Go " + plan.name}
               </button>
             </div>
           );
