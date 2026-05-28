@@ -17,17 +17,17 @@ interface SubscriptionPlan {
 
 const PLANS: SubscriptionPlan[] = [
   {
-    id: "starter",
-    name: "Starter",
-    description: "Perfect for beginners looking to learn core programming languages and fundamentals.",
-    monthlyPrice: 15,
-    yearlyPrice: 12,
+    id: "plus",
+    name: "Plus",
+    description: "Unlock uninterrupted learning and progress faster through structured coding education",
+    monthlyPrice: 199,
+    yearlyPrice: 160,
     features: [
-      "Access to 10+ core foundation courses",
-      "Basic interactive coding playgrounds",
-      "Public community forum access",
-      "5 monthly challenge submissions",
-      "Basic learning progress tracking"
+      "Unlimited Energy",
+      "Advanced Challenges",
+      "Streak Pass",
+      "Detailed Profile Statistics",
+      "Early Access Features"
     ],
     isPopular: false,
     ctaText: "Start Learning"
@@ -36,8 +36,8 @@ const PLANS: SubscriptionPlan[] = [
     id: "pro",
     name: "Pro",
     description: "Accelerate your path to mastery with full platform access, roadmaps, and custom paths.",
-    monthlyPrice: 29,
-    yearlyPrice: 24,
+    monthlyPrice: 285,
+    yearlyPrice: 228,
     features: [
       "Access to 100+ advanced courses & paths",
       "Unlimited interactive coding labs & workspaces",
@@ -46,15 +46,15 @@ const PLANS: SubscriptionPlan[] = [
       "VIP Discord support community",
       "Verified course completion certificates"
     ],
-    isPopular: true,
-    ctaText: "Upgrade to Pro"
+    isPopular: false,
+    ctaText: "Get An Upgrade"
   },
   {
     id: "elite",
     name: "Elite",
     description: "Designed for developers aiming for top tech careers with premium mentorship and reviews.",
-    monthlyPrice: 79,
-    yearlyPrice: 64,
+    monthlyPrice: 599,
+    yearlyPrice: 480,
     features: [
       "Everything included in the Pro tier",
       "1-on-1 monthly video mentorship session",
@@ -63,7 +63,7 @@ const PLANS: SubscriptionPlan[] = [
       "Guaranteed priority support under 2 hours",
       "Exclusive mock interview preparation"
     ],
-    isPopular: false,
+    isPopular: true,
     ctaText: "Unlock Elite Access"
   }
 ];
@@ -71,8 +71,19 @@ const PLANS: SubscriptionPlan[] = [
 export default function SubscriptionList() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
 
+
+  const formatSubscriptionPrice = (price: number) => {
+    return price.toLocaleString('en-IN');
+  }
+
   const calculateYearlyTotal = (pricePerMonth: number) => {
-    return pricePerMonth * 12;
+    const totalPrice = pricePerMonth * 12;
+
+    if (totalPrice % 10 === 0) {
+      return formatSubscriptionPrice(totalPrice - 1);
+    }
+
+    return formatSubscriptionPrice(totalPrice);
   };
 
   return (
@@ -106,7 +117,6 @@ export default function SubscriptionList() {
           className={`${styles.tabBtn} ${billingCycle === "yearly" ? styles.activeTabBtn : ""}`}
         >
           Yearly
-          <span className={styles.discountBadge}>Save 20%</span>
         </button>
       </div>
 
@@ -123,24 +133,27 @@ export default function SubscriptionList() {
               {plan.isPopular && (
                 <div className={styles.popularBadge}>Most Popular</div>
               )}
+              {billingCycle === "yearly" && (
+                <span className={styles.discountBadge}>Save 20%</span>
+              )}
 
               <h3 className={styles.planName}>{plan.name}</h3>
-              <p className={styles.planDesc}>{plan.description}</p>
 
               <div className={styles.priceContainer}>
                 <div className={styles.priceRow}>
-                  <span className={styles.currency}>$</span>
-                  <span className={styles.price}>{price}</span>
+                  <span className={styles.currency}>₹</span>
+                  <span className={styles.price}>{formatSubscriptionPrice(price)}</span>
                   <span className={styles.period}>/month</span>
                 </div>
                 <div className={styles.billingSubtitle}>
                   {billingCycle === "yearly" ? (
-                    `Billed annually ($${calculateYearlyTotal(price)}/year)`
+                    `Billed annually (₹${calculateYearlyTotal(price)}/year)`
                   ) : (
                     "Billed monthly, cancel anytime"
                   )}
                 </div>
               </div>
+              <p className={styles.planDesc}><q>{plan.description}</q></p><br />
 
               <hr className={styles.divider} />
 
