@@ -1,75 +1,19 @@
 "use client";
 
 // import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import { BackButton } from "./utils";
 import styles from "./subscriptions.module.css";
+import { getSubscriptions, SubscriptionPlan } from "@/repositories/subscriptions.repositories";
 
-interface SubscriptionPlan {
-  id: string;
-  name: string;
-  description: string;
-  monthlyPrice: number;
-  yearlyPrice: number; // yearly price per month (e.g. $24 instead of $29)
-  features: string[];
-  isPopular: boolean;
-  ctaText: string;
-}
-
-const PLANS: SubscriptionPlan[] = [
-  {
-    id: "plus",
-    name: "Plus",
-    description: "Unlock uninterrupted learning and progress faster through structured coding education",
-    monthlyPrice: 199,
-    yearlyPrice: 159,
-    features: [
-      "Unlimited Energy",
-      "Streak Pass",
-      "Unlimited Solutions",
-      "Detailed Profile Statistics",
-      "Early Access Features"
-    ],
-    isPopular: false,
-    ctaText: "Start Learning"
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    description: "Unlock advanced systems, premium labs, and deeper engineering experiences",
-    monthlyPrice: 286,
-    yearlyPrice: 229,
-    features: [
-      "Everything in Plus",
-      "Full Labs Access",
-      "Detailed Learning Analytics",
-      "Advanced Challenges",
-      "Exclusive Advanced Features"
-    ],
-    isPopular: true,
-    ctaText: "Get An Upgrade"
-  },
-  {
-    id: "elite",
-    name: "Elite",
-    description: "Designed for developers aiming for top tech careers with premium mentorship and reviews.",
-    monthlyPrice: 599,
-    yearlyPrice: 479,
-    features: [
-      "Everything included in the Pro tier",
-      "1-on-1 monthly video mentorship session",
-      "Quarterly resume & portfolio reviews",
-      "Access to exclusive masterclasses",
-      "Guaranteed priority support under 2 hours",
-      "Exclusive mock interview preparation"
-    ],
-    isPopular: false,
-    ctaText: "Unlock Elite Access"
-  }
-];
 
 export default function SubscriptionList() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
+  const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
+
+  useEffect(() => {
+    getSubscriptions().then(setPlans);
+  }, []);
 
 
   const formatSubscriptionPrice = (price: number) => {
@@ -132,7 +76,7 @@ export default function SubscriptionList() {
 
       {/* Pricing Grid */}
       <div className={styles.grid}>
-        {PLANS.map((plan) => {
+        {plans.map((plan) => {
           const price = billingCycle === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
 
           return (
