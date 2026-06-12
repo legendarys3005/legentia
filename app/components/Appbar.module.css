@@ -1,0 +1,207 @@
+.appbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 95px;
+  padding: 0 40px;
+  background-color: #141414;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+  z-index: 50;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+  user-select: none;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+}
+
+.pageTitle {
+  font-family: 'Exo 2', 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+}
+
+/* Simplified, larger Energy Indicator */
+.energyContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffaa00;
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 4px 8px;
+}
+
+.energyContainer:hover {
+  transform: scale(1.08);
+}
+
+.energyIcon {
+  color: #ffaa00;
+  filter: drop-shadow(0 0 8px rgba(255, 170, 0, 0.5));
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.energyValue {
+  font-family: 'Exo 2', 'Quicksand', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffaa00;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(255, 170, 0, 0.4);
+}
+
+/* Divider */
+.divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 20px;
+}
+
+/* Language Selector */
+.langSelectorContainer {
+  position: relative;
+}
+
+.langBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Exo 2', 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.langBtn:hover,
+.langBtnActive {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.codeIcon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.4s ease;
+}
+
+.langBtn:hover .codeIcon {
+  transform: scale(1.05);
+}
+
+.langCode {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.chevron {
+  color: rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Dropdown overlay & menu */
+.dropdownOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 140px;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 6px;
+  list-style: none;
+  margin: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  z-index: 101;
+  animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdownItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Exo 2', 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.dropdownItemActive {
+  background: rgba(198, 27, 33, 0.1);
+  color: #e60e15;
+  font-weight: 600;
+}
+
+.checkIcon {
+  color: #e60e15;
+}
+
+/* Animations */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

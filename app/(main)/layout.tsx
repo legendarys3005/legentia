@@ -1,14 +1,18 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
+import Appbar from "../components/Appbar";
 
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
     return (
         <div style={styles.container}>
             <Sidebar />
-            <main style={styles.content}>
-                {children}
-            </main>
+            <div style={styles.mainWrapper}>
+                <Appbar />
+                <main style={styles.content}>
+                    {children}
+                </main>
+            </div>
         </div>
     );
 }
@@ -16,9 +20,20 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 const styles = {
     container: {
         display: "flex",
-        minHeight: "100vh",
+        height: "100vh",
+        overflow: "hidden",
+        backgroundColor: "#0f0f0f",
+    },
+    mainWrapper: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column" as const,
+        height: "100vh",
+        overflow: "hidden",
+        backgroundColor: "#0f0f0f",
     },
     content: {
-        flex: 1
+        flex: 1,
+        overflowY: "auto" as const,
     }
-}
+}

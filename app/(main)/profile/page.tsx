@@ -62,82 +62,83 @@ export default function ProfilesPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-            </svg>
+      <div style={{ position: "relative" }}>
+        <div className={styles.statsGrid}>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <div className={styles.statInfo}>
+              <span className={styles.statValue}>12 Days</span>
+              <span className={styles.statLabel}>Learning Streak</span>
+            </div>
           </div>
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>12 Days</span>
-            <span className={styles.statLabel}>Learning Streak</span>
-          </div>
-        </div>
 
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-          </div>
-          {isLocked ? (
-            <span className={styles.lockedContainer}>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            {isLocked ? (
+              <span className={styles.lockedContainer}>
+                <div className={styles.statInfo}>
+                  <span className={styles.statValue}>3,450 XP</span>
+                  <span className={styles.statLabel}>Total Points</span>
+                </div>
+              </span>
+            ) : (
               <div className={styles.statInfo}>
                 <span className={styles.statValue}>3,450 XP</span>
                 <span className={styles.statLabel}>Total Points</span>
               </div>
-            </span>
-          ) : (
-            <div className={styles.statInfo}>
-              <span className={styles.statValue}>3,450 XP</span>
-              <span className={styles.statLabel}>Total Points</span>
+            )}
+          </div>
+
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+              </svg>
             </div>
-          )}
-        </div>
+            <div className={styles.statInfo}>
+              <span className={styles.statValue}>6 Courses</span>
+              <span className={styles.statLabel}>Completed</span>
+            </div>
+          </div>
 
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
-            </svg>
-          </div>
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>6 Courses</span>
-            <span className={styles.statLabel}>Completed</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 22V10h4v12" />
-              <path d="M10 22V6h4v16" />
-              <path d="M16 22V14h4v8" />
-              <path d="M2 22h20" />
-            </svg>
-          </div>
-          {isLocked ? (
-            <span className={styles.lockedContainer}>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 22V10h4v12" />
+                <path d="M10 22V6h4v16" />
+                <path d="M16 22V14h4v8" />
+                <path d="M2 22h20" />
+              </svg>
+            </div>
+            {isLocked ? (
+              <span className={styles.lockedContainer}>
+                <div className={styles.statInfo}>
+                  <span className={styles.statValue}>18th</span>
+                  <span className={styles.statLabel}>Global Rank</span>
+                </div>
+              </span>
+            ) : (
               <div className={styles.statInfo}>
                 <span className={styles.statValue}>18th</span>
                 <span className={styles.statLabel}>Global Rank</span>
               </div>
-            </span>
-          ) : (
-            <div className={styles.statInfo}>
-              <span className={styles.statValue}>18th</span>
-              <span className={styles.statLabel}>Global Rank</span>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Main split details */}
-      <div className={styles.splitLayout}>
-        {/* Left Column: Learning Progress & Activity */}
-        <div>
-          {/* In Progress Courses
+        {/* Main split details */}
+        <div className={styles.splitLayout}>
+          {/* Left Column: Learning Progress & Activity */}
+          <div>
+            {/* In Progress Courses
           <div className={styles.card}>
             <h3 className={styles.cardTitle}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -189,20 +190,32 @@ export default function ProfilesPage() {
           </div>
           */}
 
-          {/* Activity Heatmap */}
-          <div className={styles.card}>
-            <div className={styles.activityHeader}>
-              <h3 className={styles.cardTitle} style={{ margin: 0, border: "none", padding: 0 }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="18" height="18" x="3" y="3" rx="2" />
-                  <path d="M3 9h18M9 21V9" />
-                </svg>
-                Learning Consistency
-              </h3>
-              <span className={styles.lockedContainer}>Active in the last 16 weeks</span>
-            </div>
-            {isLocked ? (
-              <div className={styles.lockedContainer}>
+            {/* Activity Heatmap */}
+            <div className={styles.card}>
+              <div className={styles.activityHeader}>
+                <h3 className={styles.cardTitle} style={{ margin: 0, border: "none", padding: 0 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                    <path d="M3 9h18M9 21V9" />
+                  </svg>
+                  Learning Consistency
+                </h3>
+                <span className={styles.lockedContainer}>Active in the last 16 weeks</span>
+              </div>
+              {isLocked ? (
+                <div className={styles.lockedContainer}>
+                  <div className={styles.activityGrid}>
+                    {mockActivityLog.map((val, idx) => {
+                      let cellClass = styles.activityCell;
+                      if (val === 1) cellClass += ` ${styles.level1}`;
+                      else if (val === 2) cellClass += ` ${styles.level2}`;
+                      else if (val === 3) cellClass += ` ${styles.level3}`;
+                      else if (val === 4) cellClass += ` ${styles.level4}`;
+                      return <div key={idx} className={cellClass} title={`${val} lessons completed`} />;
+                    })}
+                  </div>
+                </div>
+              ) : (
                 <div className={styles.activityGrid}>
                   {mockActivityLog.map((val, idx) => {
                     let cellClass = styles.activityCell;
@@ -213,135 +226,124 @@ export default function ProfilesPage() {
                     return <div key={idx} className={cellClass} title={`${val} lessons completed`} />;
                   })}
                 </div>
+              )}
+              {isLocked && (
+                <>
+                  <button
+                    className={`${styles.btn} ${styles.goldenBtn}`}
+                    onClick={() => {
+                      router.push("/subscriptions");
+                    }}
+                    style={{ marginTop: "10px", width: "100%" }}
+                  >
+                    Unlock Learning analytics
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column: Course Analysis */}
+          <div>
+            <div className={styles.card}>
+              <div className={styles.activityHeader}>
+                <h3 className={styles.cardTitle} style={{ margin: 0, border: "none", padding: 0 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                  Course Analysis
+                </h3>
+                <span className={styles.lockedContainer}>Completed Courses</span>
               </div>
-            ) : (
-              <div className={styles.activityGrid}>
-                {mockActivityLog.map((val, idx) => {
-                  let cellClass = styles.activityCell;
-                  if (val === 1) cellClass += ` ${styles.level1}`;
-                  else if (val === 2) cellClass += ` ${styles.level2}`;
-                  else if (val === 3) cellClass += ` ${styles.level3}`;
-                  else if (val === 4) cellClass += ` ${styles.level4}`;
-                  return <div key={idx} className={cellClass} title={`${val} lessons completed`} />;
-                })}
-              </div>
-            )}
-            {isLocked && (
-              <>
+
+              {isLocked ? (
+                <div className={styles.lockedContainer}>
+                  <div className={styles.chartWrapper}>
+                    <div className={styles.yAxis}>
+                      <div>12</div>
+                      <div>9</div>
+                      <div>6</div>
+                      <div>3</div>
+                      <div>0</div>
+                    </div>
+                    <div className={styles.chartContainer}>
+                      <div className={styles.chartGrid}>
+                        <div className={styles.barsContainer}>
+                          {courseAnalysisData.map((item) => (
+                            <div key={item.language} className={styles.barGroup}>
+                              <div className={styles.barsPair}>
+                                <div
+                                  className={styles.chartBar}
+                                  style={{
+                                    height: `${(item.completed / 12) * 100}%`,
+                                    background: item.color,
+                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
+                                  }}
+                                >
+                                  <span className={styles.barValue}>
+                                    {item.fullName}: {item.completed} Completed
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div className={styles.chartWrapper}>
+                    <div className={styles.yAxis}>
+                      <div>12</div>
+                      <div>9</div>
+                      <div>6</div>
+                      <div>3</div>
+                      <div>0</div>
+                    </div>
+                    <div className={styles.chartContainer}>
+                      <div className={styles.chartGrid}>
+                        <div className={styles.barsContainer}>
+                          {courseAnalysisData.map((item) => (
+                            <div key={item.language} className={styles.barGroup}>
+                              <div className={styles.barsPair}>
+                                <div
+                                  className={styles.chartBar}
+                                  style={{
+                                    height: `${(item.completed / 12) * 100}%`,
+                                    background: item.color,
+                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
+                                  }}
+                                >
+                                  <span className={styles.barValue}>
+                                    {item.fullName}: {item.completed} Completed
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {isLocked && (
                 <button
                   className={`${styles.btn} ${styles.goldenBtn}`}
                   onClick={() => {
                     router.push("/subscriptions");
                   }}
-                  style={{ marginTop: "10px", width: "100%" }}
+                  style={{ marginTop: "20px", width: "100%" }}
                 >
-                  Unlock Learning Analytics
+                  Unlock Learning Analysis
                 </button>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Right Column: Course Analysis */}
-        <div>
-          <div className={styles.card}>
-            <div className={styles.activityHeader}>
-              <h3 className={styles.cardTitle} style={{ margin: 0, border: "none", padding: 0 }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="20" x2="18" y2="10" />
-                  <line x1="12" y1="20" x2="12" y2="4" />
-                  <line x1="6" y1="20" x2="6" y2="14" />
-                </svg>
-                Course Analysis
-              </h3>
-              <span className={styles.lockedContainer}>Completed Courses</span>
+              )}
             </div>
-
-            {isLocked ? (
-              <div className={styles.lockedContainer}>
-                <div className={styles.chartWrapper}>
-                  <div className={styles.yAxis}>
-                    <div>12</div>
-                    <div>9</div>
-                    <div>6</div>
-                    <div>3</div>
-                    <div>0</div>
-                  </div>
-                  <div className={styles.chartContainer}>
-                    <div className={styles.chartGrid}>
-                      <div className={styles.barsContainer}>
-                        {courseAnalysisData.map((item) => (
-                          <div key={item.language} className={styles.barGroup}>
-                            <div className={styles.barsPair}>
-                              <div
-                                className={styles.chartBar}
-                                style={{
-                                  height: `${(item.completed / 12) * 100}%`,
-                                  background: item.color,
-                                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
-                                }}
-                              >
-                                <span className={styles.barValue}>
-                                  {item.fullName}: {item.completed} Completed
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className={styles.chartWrapper}>
-                  <div className={styles.yAxis}>
-                    <div>12</div>
-                    <div>9</div>
-                    <div>6</div>
-                    <div>3</div>
-                    <div>0</div>
-                  </div>
-                  <div className={styles.chartContainer}>
-                    <div className={styles.chartGrid}>
-                      <div className={styles.barsContainer}>
-                        {courseAnalysisData.map((item) => (
-                          <div key={item.language} className={styles.barGroup}>
-                            <div className={styles.barsPair}>
-                              <div
-                                className={styles.chartBar}
-                                style={{
-                                  height: `${(item.completed / 12) * 100}%`,
-                                  background: item.color,
-                                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
-                                }}
-                              >
-                                <span className={styles.barValue}>
-                                  {item.fullName}: {item.completed} Completed
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {isLocked && (
-              <button
-                className={`${styles.btn} ${styles.goldenBtn}`}
-                onClick={() => {
-                  router.push("/subscriptions");
-                }}
-                style={{ marginTop: "20px", width: "100%" }}
-              >
-                Unlock Learning Analytics
-              </button>
-            )}
           </div>
         </div>
       </div>
