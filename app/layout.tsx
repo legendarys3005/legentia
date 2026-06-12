@@ -17,7 +17,10 @@ export const metadata: Metadata = {
   description: "Legentia is a next-generation developer learning platform designed to transform fragmented coding knowledge into structured, interactive, and mastery-driven education.",
   icons: {
     icon: "/favicon.ico"
-  }
+  },
+  other: {
+    "google-adsense-account": "ca-pub-2889024211359307",
+  },
 };
 
 export default function RootLayout({
