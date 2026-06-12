@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { BackButton } from "./utils";
 import styles from "./subscriptions.module.css";
 import { getSubscriptions, SubscriptionPlan } from "@/repositories/subscriptions.repositories";
+import { createSubscription } from "@/services/subsctiptions.service";
 
 
 export default function SubscriptionList() {
@@ -15,6 +16,12 @@ export default function SubscriptionList() {
     getSubscriptions().then(setPlans);
   }, []);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
 
   const formatSubscriptionPrice = (price: number) => {
     return price.toLocaleString('en-IN');
@@ -35,6 +42,26 @@ export default function SubscriptionList() {
 
     const percentage = discount / yearlyPrice * 100;
     return Math.round(percentage);
+  };
+
+  const handleSubscriptions = async (yearlyPlanId: string, monthlyPlanId: string, planName: string, planDesc: string) => {
+      const data = await createSubscription(billingCycle == "yearly" ? yearlyPlanId : monthlyPlanId);
+
+      const options = {
+        key: process.env.RAZORPAY_KEY_ID,
+        subscription_id: data.subscriptionId,
+
+        name: `Legentia — ${planName}`,
+        description: planDesc,
+
+        handler: (response: any) => {
+          console.log(response);
+        }
+      };
+
+      const razorpay = new (window as any).Razorpay(options);
+
+      razorpay.open();
   };
 
   return (
@@ -134,6 +161,7 @@ export default function SubscriptionList() {
 
               <button
                 className={`${styles.ctaBtn} ${plan.isPopular ? styles.popularCtaBtn : ""}`}
+                onClick={() => handleSubscriptions(plan.yearlyRezId, plan.monthlyRezId, plan.name, plan.description)}
               >
                 {plan.ctaText || "Go " + plan.name}
               </button>

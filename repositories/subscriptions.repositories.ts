@@ -7,10 +7,12 @@ export interface SubscriptionPlan {
   name: string;
   description: string;
   monthlyPrice: number;
-  yearlyPrice: number; // yearly price per month (e.g. $24 instead of $29)
+  yearlyPrice: number;
   features: string[];
   isPopular: boolean;
   ctaText: string;
+  monthlyRezId: string;
+  yearlyRezId: string;
 }
 
 
@@ -20,7 +22,6 @@ export async function getSubscriptions() {
   if (error) {
     throw error;
   }
-  console.log(data);
 
   const plans: SubscriptionPlan[] = data.map((plan) => {
     return {
@@ -32,7 +33,9 @@ export async function getSubscriptions() {
       features: plan.features,
       isPopular: plan.popular,
       ctaText: plan.ctaText,
-    }
+      monthlyRezId: plan.razorpay_monthly_id,
+      yearlyRezId: plan.razorpay_yearly_id,
+    };
   });
 
   return plans;
